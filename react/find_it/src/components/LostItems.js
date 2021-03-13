@@ -38,9 +38,58 @@ function LostItems() {
                   <th width="300px">Description</th>
                   <th>Found By</th>
                   <th>Claimers</th>
-                  <th>Owner</th>
+                  <th>Owner if known</th>
                 </tr>
               </thead>
+              {lostItems &&
+                lostItems.map((item, i) => {
+                  const timeStampDate = item.datetime;
+                  //console.log(timeStampDate);
+                  const dateInMillis = timeStampDate.seconds * 1000;
+                  //console.log(dateInMillis);
+                  var date =
+                    new Date(dateInMillis).toDateString() +
+                    " at " +
+                    new Date(dateInMillis).toLocaleTimeString();
+                  return (
+                    <tr>
+                      <td>
+                        {item.types[0]}
+                        <br />
+                        {item.types[1]}
+                        <br />
+                        {item.types[2]}
+                        <br />
+                        {item.types[3]}
+                        <br />
+                        {item.types[4]}
+                        <br />
+                      </td>
+                      <td>{item.locfound}</td>
+                      <td>{item.locdeposited}</td>
+                      <td>{date}</td>
+                      <td>{item.description}</td>
+                      <td>{item.foundby}</td>
+                      {item.claimers == null ? (
+                        <td></td>
+                      ) : (
+                        <td>
+                          {item.claimers[0]}
+                          <br />
+                          {item.claimers[1]}
+                          <br />
+                          {item.claimers[2]}
+                          <br />
+                          {item.claimers[3]}
+                          <br />
+                          {item.claimers[4]}
+                          <br />
+                        </td>
+                      )}
+                      <td>{item.owner}</td>
+                    </tr>
+                  );
+                })}
               <tfoot>
                 <tr>
                   <th>Type</th>
@@ -50,7 +99,7 @@ function LostItems() {
                   <th>Description</th>
                   <th>Found By</th>
                   <th>Claimers</th>
-                  <th>Owner</th>
+                  <th>Owner if known</th>
                 </tr>
               </tfoot>
               <tbody id="table-body"></tbody>
