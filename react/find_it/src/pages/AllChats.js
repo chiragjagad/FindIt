@@ -27,7 +27,7 @@ const AllChats = () => {
 
     return (
         <>
-            {listOfChats.map(chat => <ChatButton chat={chat}/>)}
+            {listOfChats.map((chat, index) => <ChatButton key={index} chat={chat}/>)}
         </>
     )
 }
