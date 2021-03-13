@@ -25,35 +25,6 @@ function Cards() {
   console.log(founditems);
   console.log(lostitems);
 
-  /*  function addItem() {
-    var timestamp = firebase.firestore.Timestamp;
-    //console.log(timeStampDate);
-    const dateInMillis = timestamp.seconds * 1000;
-    //console.log(dateInMillis);
-    var date =
-      new Date(dateInMillis).toDateString() +
-      " at " +
-      new Date(dateInMillis).toLocaleTimeString();
-    const item = {
-      claimedby: "",
-      claimers: [],
-      datetime: date,
-      description: document.getElementById("description").innerHTML,
-      foundby: document.getElementById("name").innerHTML,
-      locdeposited: document.getElementById("loc-deposited").innerHTML,
-      locfound: document.getElementById("loc-found").innerHTML,
-      owner: document.getElementById("owner").innerHTML,
-      types: [
-        document.getElementById("type0").innerHTML,
-        document.getElementById("type1").innerHTML,
-        document.getElementById("type2").innerHTML,
-        document.getElementById("type3").innerHTML,
-        document.getElementById("type4").innerHTML,
-      ],
-    };
-    db.collection("lost-items").add(item);
-  } */
-
   const addItem = (Event) => {
     // preventing default nature of form of refresh
     Event.preventDefault();
@@ -64,8 +35,8 @@ function Cards() {
       datetime: firebase.firestore.FieldValue.serverTimestamp(),
       description: desc,
       foundby: fb,
-      ld: ld,
-      lf: lf,
+      locdeposited: ld,
+      locfound: lf,
       owner: owner,
       types: [type0, type1, type2, type3, type4],
     });
@@ -233,7 +204,7 @@ function Cards() {
                 Submit
               </button>
             </div>
-          </div>{" "}
+          </div>
         </div>
       </div>
       <div class="d-sm-flex align-items-center justify-content-between mb-4">

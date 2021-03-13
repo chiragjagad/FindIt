@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import firebase from "firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
@@ -35,15 +35,18 @@ function LostItems() {
                   <th>Type</th>
                   <th>Location Found</th>
                   <th>Location Deposited</th>
-                  <th width="300px">Date</th>
-                  <th width="300px">Description</th>
+                  <th width="200px">Date</th>
+                  <th width="200px">Description</th>
                   <th>Found By</th>
-                  <th>Claimers</th>
                   <th>Owner if known</th>
+                  <th>Claimers</th>
+                  <th>Give claim to</th>
                 </tr>
               </thead>
               {lostItems &&
                 lostItems.map((item, i) => {
+                  console.log(item);
+                  console.log(i);
                   const timeStampDate = item.datetime;
                   //console.log(timeStampDate);
                   const dateInMillis = timeStampDate.seconds * 1000;
@@ -71,6 +74,7 @@ function LostItems() {
                       <td>{date}</td>
                       <td>{item.description}</td>
                       <td>{item.foundby}</td>
+                      <td>{item.owner}</td>
                       {item.claimers == null ? (
                         <td></td>
                       ) : (
@@ -87,7 +91,17 @@ function LostItems() {
                           <br />
                         </td>
                       )}
-                      <td>{item.owner}</td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id=""
+                          style={{ marginBottom: "10px" }}
+                        />
+                        <button type="button" class="btn btn-primary">
+                          Claim
+                        </button>
+                      </td>
                     </tr>
                   );
                 })}
@@ -99,8 +113,9 @@ function LostItems() {
                   <th>Date</th>
                   <th>Description</th>
                   <th>Found By</th>
-                  <th>Claimers</th>
                   <th>Owner if known</th>
+                  <th>Claimers</th>
+                  <th>Give claim to</th>
                 </tr>
               </tfoot>
               <tbody id="table-body"></tbody>
