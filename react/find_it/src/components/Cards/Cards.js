@@ -31,7 +31,49 @@ function Cards() {
         aria-hidden="true"
       >
         <div class="modal-dialog modal-xl">
-          <div class="modal-content">...</div>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                New message
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="type" class="col-form-label">
+                    Types:
+                  </label>
+                  <input type="text" class="form-control" id="recipient-name" />
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">
+                    Message:
+                  </label>
+                  <textarea class="form-control" id="message-text"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Send message
+              </button>
+            </div>
+          </div>{" "}
         </div>
       </div>
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
