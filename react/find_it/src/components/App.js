@@ -8,7 +8,10 @@ function App() {
   return (
     <div className="App">
       <Sidebar />
-      <Cards />
+      <div>
+        <TopNavbar />
+        <Cards />
+      </div>
     </div>
   );
 }
