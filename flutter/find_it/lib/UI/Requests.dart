@@ -1,3 +1,4 @@
+import 'package:find_it/UI/ChatPage.dart';
 import 'package:flutter/material.dart';
 class Requests extends StatefulWidget {
   @override
@@ -7,6 +8,6 @@ class Requests extends StatefulWidget {
 class _RequestsState extends State<Requests> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ChatPage();
   }
 }

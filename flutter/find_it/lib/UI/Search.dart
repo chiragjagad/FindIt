@@ -26,7 +26,7 @@ class _SearchState extends State<Search> {
               //   child: Text(""),
               // ),
               SizedBox(
-                height: 0.08*MediaQuery.of(context).size.height,
+                height: 0.07*MediaQuery.of(context).size.height,
               ),
               getAppBarUI(),
               Expanded(

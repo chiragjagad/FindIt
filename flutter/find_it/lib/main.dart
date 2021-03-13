@@ -1,4 +1,5 @@
 
+import 'package:find_it/UI/ChatPage.dart';
 import 'package:find_it/services/auth.dart';
 import 'package:find_it/wrapper/Wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,8 +12,8 @@ void main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-  // SystemChrome. setEnabledSystemUIOverlays([]);
-  SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+  SystemChrome. setEnabledSystemUIOverlays([]);
+  //SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
   await Firebase.initializeApp();
   runApp(StreamProvider<User>.value(
     value: AuthService().user,
