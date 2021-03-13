@@ -9,23 +9,24 @@ const Sidebar = () => {
         class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
         id="accordionSidebar"
       >
-        <a
-          class="sidebar-brand d-flex align-items-center justify-content-center"
-          href=""
-        >
-          <div class="sidebar-brand-icon rotate-n-15">
-            <img src={logo} style={{ height: "50px", width: "50px" }} />
-          </div>
-          <div class="sidebar-brand-text mx-3">Findit</div>
-        </a>
+        <Link to="/dashboard">
+          <a class="sidebar-brand d-flex align-items-center justify-content-center">
+            <div class="sidebar-brand-icon rotate-n-15">
+              <img src={logo} style={{ height: "50px", width: "50px" }} />
+            </div>
+            <div class="sidebar-brand-text mx-3">Findit</div>
+          </a>
+        </Link>
 
         <hr class="sidebar-divider my-0"></hr>
 
         <li class="nav-item active">
-          <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-          </a>
+          <Link to="/dashboard">
+            <a class="nav-link" href="index.html">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+              <span>Dashboard</span>
+            </a>
+          </Link>
         </li>
 
         <hr class="sidebar-divider" />

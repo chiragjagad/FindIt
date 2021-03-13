@@ -1,16 +1,49 @@
 import React from "react";
+import firebase from "firebase";
 
 function Cards() {
+  const total = document.getElementById("total-items-count");
+  const found = document.getElementById("found-items-count");
+  const pending = document.getElementById("pending-items-count");
+  var db = firebase.firestore();
+  const lostRef = db.collection("countries");
+  const foundRef = db.collection("countries");
+
+  lostRef.get().then((snap) => {
+    var size = snap.size;
+    console.log(size);
+    //pending.innerHTML = size;
+  });
+
+  foundRef.get().then((snap) => {
+    var size = snap.size;
+    console.log(size);
+    //found.innerHTML = size;
+  });
+
   return (
     <div class="container-fluid">
+      <div
+        class="modal fade bd-example-modal-xl"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myExtraLargeModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">...</div>
+        </div>
+      </div>
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        <a
-          href="#"
+        <button
+          type="button"
           class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+          data-toggle="modal"
+          data-target=".bd-example-modal-xl"
         >
           <i class="fas fa-download fa-sm text-white-50"></i> Add Item
-        </a>
+        </button>
       </div>
 
       <div class="row">
@@ -20,9 +53,12 @@ function Cards() {
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                    Lost Items
+                    Total Items
                   </div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                  <div
+                    class="h5 mb-0 font-weight-bold text-gray-800"
+                    id="total-items-count"
+                  ></div>
                 </div>
                 <div class="col-auto">
                   <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -40,10 +76,33 @@ function Cards() {
                   <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                     Found Items
                   </div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                  <div
+                    class="h5 mb-0 font-weight-bold text-gray-800"
+                    id="found-items-count"
+                  ></div>
                 </div>
                 <div class="col-auto">
                   <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                    Pending Items
+                  </div>
+                  <div
+                    class="h5 mb-0 font-weight-bold text-gray-800"
+                    id="pending-items-count"
+                  ></div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-comments fa-2x text-gray-300"></i>
                 </div>
               </div>
             </div>
@@ -78,24 +137,6 @@ function Cards() {
                 </div>
                 <div class="col-auto">
                   <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xl-3 col-md-6 mb-4">
-          <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                    Pending Items
-                  </div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                </div>
-                <div class="col-auto">
-                  <i class="fas fa-comments fa-2x text-gray-300"></i>
                 </div>
               </div>
             </div>
