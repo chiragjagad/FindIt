@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -57,6 +58,18 @@ class AuthService {
       assert(await user.getIdToken() != null);
       final User currentUser = _auth.currentUser;
       assert(user.uid == currentUser.uid);
+      final QuerySnapshot result =
+      await FirebaseFirestore.instance.collection('users').where('id', isEqualTo: user.uid).get();
+      final List<DocumentSnapshot> documents = result.docs;
+      if (documents.length == 0) {
+        // Update data to server if new user
+        FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'name': user.displayName,
+          'urlAvatar': user.photoURL,
+          'idUser': user.uid,
+          'lastMessageTime': null
+        });
+      }
       print('hey');
       print('signInWithGoogle succeeded: $user');
       return user;
