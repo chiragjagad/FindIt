@@ -1,45 +1,14 @@
 import React from "react";
 import firebase from "firebase";
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 function LostItems() {
   const TableBody = document.getElementById("table-body");
 
   var db = firebase.firestore();
-  var col = db.collection("lost-items");
-  const lostarr = [];
-  var lostitems = col
-    .get()
-    .then((snapshot) => {
-      var content = "";
-      snapshot.forEach((doc) => {
-        var ItemData = doc.data();
-        //console.log(ItemData);
-        const timeStampDate = ItemData.datetime;
-        //console.log(timeStampDate);
-        const dateInMillis = timeStampDate.seconds * 1000;
-        //console.log(dateInMillis);
-        var date =
-          new Date(dateInMillis).toDateString() +
-          " at " +
-          new Date(dateInMillis).toLocaleTimeString();
-        //console.log(date);
-        let html = `<tr>
-        <td>${ItemData.types[0]}<br>${ItemData.types[1]}${ItemData.types[2]}<br>${ItemData.types[3]}<br>${ItemData.types[4]}<br></td>
-        <td>${ItemData.locfound}</td>
-        <td>${ItemData.locdeposited}</td>
-        <td>${date}</td>
-        <td>${ItemData.description}</td>
-        <td>${ItemData.foundby}</td>
-        <td>${ItemData.claimers[0]}<br>${ItemData.claimers[1]}<br>${ItemData.claimers[2]}<br>${ItemData.claimers[3]}<br>${ItemData.claimers[4]}<br></td>
-        <td>${ItemData.owner}</td>
-        </tr>`;
-        content += html;
-        TableBody.innerHTML = content;
-      });
-    })
-    .catch((err) => {
-      console.log("Error getting documents", err);
-    });
+  var query = db.collection("lost-items");
+
+  const [ lostItems ] = useCollectionData(query)
 
   return (
     <div class="container-fluid">
