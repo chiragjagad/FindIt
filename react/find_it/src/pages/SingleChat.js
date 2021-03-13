@@ -6,12 +6,19 @@ import AllChats from './AllChats'
 
 const SingleChat = ({ match }) => {
 
-    const query = firestoreDB.collection('chats/DWctr1yJVoaV46SKQxQ5/messages')
+    const uid = "DWctr1yJVoaV46SKQxQ5"
+
+    const query = firestoreDB.collection(`chats/${uid}/messages`)
     const [messages] = useCollectionData(query)
 
     return (
-        <div>
-            {messages && messages.map(message => <div>{message.idUser}</div>)}
+        <div style={{ width: '100%' }} >
+            {messages && messages.map(message => <div style={{ 
+                display: 'flex',
+                margin: '10px',
+                justifyContent: uid === message.idUser ? 'flex-end' : 'flex-start',
+                backgroundColor: uid === message.idUser ? 'red' : 'blue',
+            }}><p>{message.idUser}</p></div>)}
         </div>
     )
 }
