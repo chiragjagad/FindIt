@@ -1,8 +1,9 @@
 import React from 'react';
 import firebase from "firebase";
-import { db } from "../components/firebase";
-import { Redirect, useHistory,useLocation } from "react-router-dom";
+import { db, firestoreDB } from "../components/firebase";
+import { useHistory,NavLink } from "react-router-dom";
 const Register = ()=>{
+    const history = useHistory();
     const [name,setName]=React.useState("");
     const [email,setEmail]=React.useState("");
     const [pass,setPass]=React.useState("");
@@ -15,11 +16,9 @@ const Register = ()=>{
         }else{
             firebase.auth().createUserWithEmailAndPassword(email, pass)
                 .then((userCredential) => {
-                    // Signed in 
-                    var user = userCredential.user;
-                    console.log(user);
-                    
-                    // ...
+                    const uid = userCredential.user.uid;
+                    firestoreDB.collection("admins").add({ name, email, uid, })
+                    history.pushState("/dashboard",)
                 })
                 .catch((error) => {
                     var errorCode = error.code;
@@ -46,7 +45,7 @@ const Register = ()=>{
                             </div>
                             <form class="user" onSubmit={onFormSubmit}>
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-12 mb-6 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
                                             placeholder="Name of the Organization" value={name} onChange={e=>setName(e.target.value)}/>
                                     </div>
@@ -72,11 +71,11 @@ const Register = ()=>{
                                 
                             </form>
                             <hr/>
-                            <div class="text-center">
+                            {/* <div class="text-center">
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
+                            </div> */}
                             <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
+                                <NavLink class="small" to="/login">Already have an account? Login!</NavLink>
                             </div>
                         </div>
                     </div>

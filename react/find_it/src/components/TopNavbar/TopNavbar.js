@@ -1,6 +1,16 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom';
+import firebase from 'firebase';
 
 const TopNavbar = () => {
+    const history = useHistory();
+    const logOut = ()=>{
+        firebase.auth().signOut().then(() => {
+            history.push("/login");
+        }).catch((error) => {
+            // An error happened.
+        });
+    }
     return (
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -180,10 +190,10 @@ const TopNavbar = () => {
                                     Activity Log
                                 </a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                            <button onClick={logOut} class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
                                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
-                                </a>
+                                </button>
                                         </div>
                         </li>
 
