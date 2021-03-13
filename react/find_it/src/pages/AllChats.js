@@ -5,7 +5,7 @@ import { firestoreDB } from '../components/firebase'
 const ChatButton = ({ chat }) => {
     const history = useHistory()
     return <div onClick={() => {
-        history.push(`/talk/${chat.idUser}`)
+        history.push(`/chat/${chat.idUser}`)
     }}>{chat.name}</div>
 }
 
