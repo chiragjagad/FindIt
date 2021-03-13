@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React, { useEffect } from "react";
 import Cards from "../components/Cards/Cards";
 import LostItems from "../components/LostItems";
+import FoundItems from "../components/FoundItems";
 import Sidebar from "../components/Sidebar/Sidebar";
 import firebase from "firebase";
 import { useHistory } from "react-router-dom";
@@ -25,6 +26,7 @@ const Dashboard = () => {
             <TopNavbar />
             <Route exact path="/dashboard" component={Cards} />
             <Route exact path="/dashboard/lostitems" component={LostItems} />
+            <Route exact path="/dashboard/founditems" component={FoundItems} />
           </div>
         </div>
       </Switch>

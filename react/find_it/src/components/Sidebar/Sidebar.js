@@ -119,10 +119,12 @@ const Sidebar = () => {
         </li>
 
         <li class="nav-item">
-          <a class="nav-link">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Found Items</span>
-          </a>
+          <Link to="/dashboard/founditems">
+            <a class="nav-link">
+              <i class="fas fa-fw fa-chart-area"></i>
+              <span>Found Items</span>
+            </a>
+          </Link>
         </li>
 
         <li class="nav-item">

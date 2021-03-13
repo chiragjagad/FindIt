@@ -2,14 +2,14 @@ import React from "react";
 import firebase from "firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
-function LostItems() {
+function FoundItems() {
   const TableBody = document.getElementById("table-body");
 
   var db = firebase.firestore();
   var query = db.collection("lost-items");
-  var lost = query.where("claimedby", "==", "");
+  var found = query.where("claimedby", "!=", "");
 
-  const [lostItems] = useCollectionData(lost);
+  const [founditems] = useCollectionData(found);
 
   return (
     <div class="container-fluid">
@@ -19,7 +19,7 @@ function LostItems() {
       <div class="card shadow mb-4">
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">
-            Find your lost item here
+            Find your found item here
           </h6>
         </div>
         <div class="card-body">
@@ -42,8 +42,8 @@ function LostItems() {
                   <th>Owner if known</th>
                 </tr>
               </thead>
-              {lostItems &&
-                lostItems.map((item, i) => {
+              {founditems &&
+                founditems.map((item) => {
                   const timeStampDate = item.datetime;
                   //console.log(timeStampDate);
                   const dateInMillis = timeStampDate.seconds * 1000;
@@ -53,7 +53,7 @@ function LostItems() {
                     " at " +
                     new Date(dateInMillis).toLocaleTimeString();
                   return (
-                    <tr key={i}>
+                    <tr>
                       <td>
                         {item.types[0]}
                         <br />
@@ -87,7 +87,7 @@ function LostItems() {
                           <br />
                         </td>
                       )}
-                      <td>{item.owner}</td>
+                      <td>{item.claimedby}</td>
                     </tr>
                   );
                 })}
@@ -100,7 +100,7 @@ function LostItems() {
                   <th>Description</th>
                   <th>Found By</th>
                   <th>Claimers</th>
-                  <th>Owner if known</th>
+                  <th>Claimed by</th>
                 </tr>
               </tfoot>
               <tbody id="table-body"></tbody>
@@ -112,4 +112,4 @@ function LostItems() {
   );
 }
 
-export default LostItems;
+export default FoundItems;

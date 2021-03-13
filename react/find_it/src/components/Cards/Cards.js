@@ -1,25 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
 import firebase from "firebase";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 function Cards() {
-  const total = document.getElementById("total-items-count");
-  const found = document.getElementById("found-items-count");
-  const pending = document.getElementById("pending-items-count");
+  const [type0, setType0] = useState("");
+  const [type1, setType1] = useState("");
+  const [type2, setType2] = useState("");
+  const [type3, setType3] = useState("");
+  const [type4, setType4] = useState("");
+  const [desc, setDesc] = useState("");
+  const [fb, setFb] = useState("");
+  const [ld, setLd] = useState("");
+  const [lf, setLf] = useState("");
+  const [owner, setOwner] = useState("");
+
   var db = firebase.firestore();
-  const lostRef = db.collection("countries");
-  const foundRef = db.collection("countries");
+  var query = db.collection("lost-items");
+  var lostdata = query.where("claimedby", "==", "");
+  var founddata = query.where("claimedby", "!=", "");
 
-  lostRef.get().then((snap) => {
-    var size = snap.size;
-    console.log(size);
-    //pending.innerHTML = size;
-  });
+  const [founditems] = useCollectionData(founddata);
+  const [lostitems] = useCollectionData(lostdata);
 
-  foundRef.get().then((snap) => {
-    var size = snap.size;
-    console.log(size);
-    //found.innerHTML = size;
-  });
+  console.log(founditems);
+  console.log(lostitems);
+
+  /*  function addItem() {
+    var timestamp = firebase.firestore.Timestamp;
+    //console.log(timeStampDate);
+    const dateInMillis = timestamp.seconds * 1000;
+    //console.log(dateInMillis);
+    var date =
+      new Date(dateInMillis).toDateString() +
+      " at " +
+      new Date(dateInMillis).toLocaleTimeString();
+    const item = {
+      claimedby: "",
+      claimers: [],
+      datetime: date,
+      description: document.getElementById("description").innerHTML,
+      foundby: document.getElementById("name").innerHTML,
+      locdeposited: document.getElementById("loc-deposited").innerHTML,
+      locfound: document.getElementById("loc-found").innerHTML,
+      owner: document.getElementById("owner").innerHTML,
+      types: [
+        document.getElementById("type0").innerHTML,
+        document.getElementById("type1").innerHTML,
+        document.getElementById("type2").innerHTML,
+        document.getElementById("type3").innerHTML,
+        document.getElementById("type4").innerHTML,
+      ],
+    };
+    db.collection("lost-items").add(item);
+  } */
+
+  const addItem = (Event) => {
+    // preventing default nature of form of refresh
+    Event.preventDefault();
+
+    db.collection("lost-items").add({
+      claimedby: "",
+      claimers: [],
+      datetime: firebase.firestore.FieldValue.serverTimestamp(),
+      description: desc,
+      foundby: fb,
+      ld: ld,
+      lf: lf,
+      owner: owner,
+      types: [type0, type1, type2, type3, type4],
+    });
+    setType0("");
+    setType1("");
+    setType2("");
+    setType3("");
+    setType4("");
+    setDesc("");
+    setFb("");
+    setLf("");
+    setLd("");
+    setOwner("");
+  };
 
   return (
     <div class="container-fluid">
@@ -30,11 +90,11 @@ function Cards() {
         aria-labelledby="myExtraLargeModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
-                New message
+                Lost Item Details
               </h5>
               <button
                 type="button"
@@ -49,15 +109,110 @@ function Cards() {
               <form>
                 <div class="form-group">
                   <label for="type" class="col-form-label">
-                    Types:
+                    Your name
                   </label>
-                  <input type="text" class="form-control" id="recipient-name" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    value={fb}
+                    onChange={(Event) => setFb(Event.target.value)}
+                  />
                 </div>
                 <div class="form-group">
-                  <label for="message-text" class="col-form-label">
-                    Message:
+                  <label for="type" class="col-form-label">
+                    Types:
                   </label>
-                  <textarea class="form-control" id="message-text"></textarea>
+                  <div style={{ display: "flex" }}>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="type0"
+                      style={{ marginLeft: "10px", marginRight: "10px" }}
+                      value={type0}
+                      onChange={(Event) => setType0(Event.target.value)}
+                    />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="type1"
+                      style={{ marginLeft: "10px", marginRight: "10px" }}
+                      value={type1}
+                      onChange={(Event) => setType1(Event.target.value)}
+                    />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="type2"
+                      style={{ marginLeft: "10px", marginRight: "10px" }}
+                      value={type2}
+                      onChange={(Event) => setType2(Event.target.value)}
+                    />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="type3"
+                      style={{ marginLeft: "10px", marginRight: "10px" }}
+                      value={type3}
+                      onChange={(Event) => setType3(Event.target.value)}
+                    />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="type4"
+                      style={{ marginLeft: "10px", marginRight: "10px" }}
+                      value={type4}
+                      onChange={(Event) => setType4(Event.target.value)}
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="type" class="col-form-label">
+                    Where did you find this item?
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="loc-found"
+                    value={lf}
+                    onChange={(Event) => setLf(Event.target.value)}
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="type" class="col-form-label">
+                    Where did you deposit this item?
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="loc-deposit"
+                    value={ld}
+                    onChange={(Event) => setLd(Event.target.value)}
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="type" class="col-form-label">
+                    Description
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="desc"
+                    value={desc}
+                    onChange={(Event) => setDesc(Event.target.value)}
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="type" class="col-form-label">
+                    Owner (if any found through the item)
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="owner"
+                    value={owner}
+                    onChange={(Event) => setOwner(Event.target.value)}
+                  />
                 </div>
               </form>
             </div>
@@ -69,8 +224,13 @@ function Cards() {
               >
                 Close
               </button>
-              <button type="button" class="btn btn-primary">
-                Send message
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                onClick={addItem}
+              >
+                Submit
               </button>
             </div>
           </div>{" "}
@@ -84,7 +244,11 @@ function Cards() {
           data-toggle="modal"
           data-target=".bd-example-modal-xl"
         >
-          <i class="fas fa-download fa-sm text-white-50"></i> Add Item
+          <i
+            class="fas fa-download fa-sm text-white-50"
+            style={{ marginRight: "10px" }}
+          ></i>{" "}
+          Add Item
         </button>
       </div>
 
@@ -100,7 +264,11 @@ function Cards() {
                   <div
                     class="h5 mb-0 font-weight-bold text-gray-800"
                     id="total-items-count"
-                  ></div>
+                  >
+                    {founditems &&
+                      lostitems &&
+                      founditems.length + lostitems.length}
+                  </div>
                 </div>
                 <div class="col-auto">
                   <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -121,7 +289,9 @@ function Cards() {
                   <div
                     class="h5 mb-0 font-weight-bold text-gray-800"
                     id="found-items-count"
-                  ></div>
+                  >
+                    {founditems && founditems.length}
+                  </div>
                 </div>
                 <div class="col-auto">
                   <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -141,7 +311,9 @@ function Cards() {
                   <div
                     class="h5 mb-0 font-weight-bold text-gray-800"
                     id="pending-items-count"
-                  ></div>
+                  >
+                    {lostitems && lostitems.length}
+                  </div>
                 </div>
                 <div class="col-auto">
                   <i class="fas fa-comments fa-2x text-gray-300"></i>
