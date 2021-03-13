@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import Firebase from 'firebase'
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { firestoreDB } from '../components/firebase'
 import AllChats from './AllChats'
 
-const Talk = ({ match }) => {
+const SingleChat = ({ match }) => {
 
-    const chatId = match.params.chatId
+    const query = firestoreDB.collection('chats/DWctr1yJVoaV46SKQxQ5/messages')
+    const [messages] = useCollectionData(query)
 
-    useEffect(() => {
-        console.log(chatId)
-    }, [])
-
-    return <div>{chatId}</div>
+    return (
+        <div>
+            {messages && messages.map(message => <div>{message.idUser}</div>)}
+        </div>
+    )
 }
 
-export default Talk
+export default SingleChat
