@@ -1,10 +1,10 @@
+import React from "react";
 import "./App.css";
-import Cards from "./Cards/Cards";
-
+import Sidebar from "../components/Sidebar/Sidebar";
 function App() {
   return (
     <div className="App">
-      <Cards />
+      <Sidebar />
     </div>
   );
 }
