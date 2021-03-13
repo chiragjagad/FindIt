@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from "firebase";
-import { db } from "../components/firebase";
+import { db, firestoreDB } from "../components/firebase";
 import { Redirect, useHistory,useLocation } from "react-router-dom";
 const Register = ()=>{
     const [name,setName]=React.useState("");
@@ -14,11 +14,8 @@ const Register = ()=>{
         }else{
             firebase.auth().createUserWithEmailAndPassword(email, pass)
                 .then((userCredential) => {
-                    // Signed in 
-                    var user = userCredential.user;
-                    console.log(user);
-
-                    // ...
+                    const uid = userCredential.user.uid;
+                    firestoreDB.collection("admins").add({ name, email, uid, })
                 })
                 .catch((error) => {
                     var errorCode = error.code;
