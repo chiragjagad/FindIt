@@ -7,6 +7,7 @@ const Register = ()=>{
     const [email,setEmail]=React.useState("");
     const [pass,setPass]=React.useState("");
     const [rep, setRep] = React.useState("");
+    console.log(db);
     const onFormSubmit=(e)=>{
         e.preventDefault();
         if(pass!==rep||pass===""){
