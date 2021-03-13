@@ -9,7 +9,7 @@ const ChatButton = ({ chat }) => {
     }}>{chat.name}</div>
 }
 
-const Chat = () => {
+const AllChats = () => {
 
     const [ listOfChats, setListofChats ] = useState([])
 
@@ -32,4 +32,4 @@ const Chat = () => {
     )
 }
 
-export AllChats Chat 
+export default AllChats
