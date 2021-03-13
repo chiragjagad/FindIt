@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   display: flex;
+  width: -webkit-fill-available;
 }
 
 .App-logo {
