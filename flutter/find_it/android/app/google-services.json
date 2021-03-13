@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "97059543954",
+    "project_id": "find-it-fe243",
+    "storage_bucket": "find-it-fe243.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97059543954:android:0681fa9f8c6483717b7f4b",
+        "android_client_info": {
+          "package_name": "com.example.find_it"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97059543954-hgs0icf8c9bnkbqe85qvc3kc6cloegmu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.find_it",
+            "certificate_hash": "0156b961461fe42a1cdca37ef34350e1801aa207"
+          }
+        },
+        {
+          "client_id": "97059543954-32lh735a7p1as86bn95utgml9nqd1int.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHVmt0mTMFhnRDi82AOJSnIvh6xpx6REQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97059543954-32lh735a7p1as86bn95utgml9nqd1int.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
