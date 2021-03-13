@@ -13,15 +13,24 @@ function LostItems() {
       var content = "";
       snapshot.forEach((doc) => {
         var ItemData = doc.data();
-        console.log(ItemData);
+        //console.log(ItemData);
+        const timeStampDate = ItemData.datetime;
+        //console.log(timeStampDate);
+        const dateInMillis = timeStampDate.seconds * 1000;
+        //console.log(dateInMillis);
+        var date =
+          new Date(dateInMillis).toDateString() +
+          " at " +
+          new Date(dateInMillis).toLocaleTimeString();
+        //console.log(date);
         let html = `<tr>
-        <td>${ItemData.types}</td>
+        <td>${ItemData.types[0]}<br>${ItemData.types[1]}${ItemData.types[2]}<br>${ItemData.types[3]}<br>${ItemData.types[4]}<br></td>
         <td>${ItemData.locfound}</td>
         <td>${ItemData.locdeposited}</td>
-        <td>${ItemData.datetime}</td>
+        <td>${date}</td>
         <td>${ItemData.description}</td>
         <td>${ItemData.foundby}</td>
-        <td>${ItemData.claimers}</td>
+        <td>${ItemData.claimers[0]}<br>${ItemData.claimers[1]}<br>${ItemData.claimers[2]}<br>${ItemData.claimers[3]}<br>${ItemData.claimers[4]}<br></td>
         <td>${ItemData.owner}</td>
         </tr>`;
         content += html;
@@ -46,7 +55,9 @@ function LostItems() {
 
       <div class="card shadow mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+          <h6 class="m-0 font-weight-bold text-primary">
+            Find your lost item here
+          </h6>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -61,8 +72,8 @@ function LostItems() {
                   <th>Type</th>
                   <th>Location Found</th>
                   <th>Location Deposited</th>
-                  <th>Date</th>
-                  <th>Description</th>
+                  <th width="300px">Date</th>
+                  <th width="300px">Description</th>
                   <th>Found By</th>
                   <th>Claimers</th>
                   <th>Owner</th>
