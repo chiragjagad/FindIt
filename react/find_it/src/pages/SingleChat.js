@@ -23,6 +23,7 @@ const SingleChat = ({ match }) => {
             message: textField,
             createdAt: Firebase.firestore.FieldValue.serverTimestamp()
         })
+        setTextField("")
     }
 
     return (
@@ -32,6 +33,8 @@ const SingleChat = ({ match }) => {
                 margin: '10px',
                 justifyContent: uid === message.sender ? 'flex-end' : 'flex-start',
                 backgroundColor: uid === message.sender ? 'red' : 'blue',
+                borderRadius: '5px',
+                padding: '10px',
             }}><p>{message.message}</p></div>)}
         <input value={textField} onChange={event => setTextField(event.target.value)}/>
         <button onClick={sendMessage}>GO</button>
