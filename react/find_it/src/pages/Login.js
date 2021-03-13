@@ -1,8 +1,9 @@
 import React from 'react';
 import firebase from "firebase";
 import { db } from "../components/firebase";
-import {NavLink} from 'react-router-dom';
+import {NavLink,useHistory} from 'react-router-dom';
 const Login=()=>{
+    const history=useHistory();
     const [email,setEmail]=React.useState("");
     const [pass,setPass]=React.useState("");
     const onFormSubmit=(e)=>{
@@ -11,7 +12,7 @@ const Login=()=>{
             .then((userCredential) => {
                 // Signed in
                 var user = userCredential.user;
-                console.log(user);
+                history.push("/dashboard");
                 // ...
             })
             .catch((error) => {
@@ -53,7 +54,7 @@ const Login=()=>{
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div> */}
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <NavLink to="/register">Create an Account!</NavLink>
                                     </div>
                                 </div>
                             </div>
