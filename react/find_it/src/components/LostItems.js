@@ -1,5 +1,6 @@
 import React from "react";
 import firebase from "firebase";
+import { firestoreDB } from "../components/firebase";
 
 function LostItems() {
   const TableBody = document.getElementById("table-body");
@@ -10,10 +11,10 @@ function LostItems() {
   var lostitems = col
     .get()
     .then((snapshot) => {
-      var content = "";
+      var content = " ";
       snapshot.forEach((doc) => {
         var ItemData = doc.data();
-        //console.log(ItemData);
+        console.log(ItemData);
         const timeStampDate = ItemData.datetime;
         //console.log(timeStampDate);
         const dateInMillis = timeStampDate.seconds * 1000;
