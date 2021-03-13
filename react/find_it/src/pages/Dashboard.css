@@ -1,0 +1,5 @@
+.Dashboard {
+  text-align: center;
+  display: flex;
+  width: -webkit-fill-available;
+}

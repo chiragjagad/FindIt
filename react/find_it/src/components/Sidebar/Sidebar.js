@@ -1,5 +1,7 @@
 import React from "react";
 import logo from "./img/findit-logo.png";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 const Sidebar = () => {
   return (
     <>
@@ -9,7 +11,7 @@ const Sidebar = () => {
       >
         <a
           class="sidebar-brand d-flex align-items-center justify-content-center"
-          href="index.html"
+          href=""
         >
           <div class="sidebar-brand-icon rotate-n-15">
             <img src={logo} style={{ height: "50px", width: "50px" }} />
@@ -101,21 +103,22 @@ const Sidebar = () => {
         <div class="sidebar-heading">Addons</div>
 
         <li class="nav-item">
-          <a
-            class="nav-link collapsed"
-            href="#"
-            data-toggle="collapse"
-            data-target="#collapsePages"
-            aria-expanded="true"
-            aria-controls="collapsePages"
-          >
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Lost Items</span>
-          </a>
+          <Link to="/dashboard/lostitems">
+            <a
+              class="nav-link collapsed"
+              data-toggle="collapse"
+              data-target="#collapsePages"
+              aria-expanded="true"
+              aria-controls="collapsePages"
+            >
+              <i class="fas fa-fw fa-folder"></i>
+              <span>Lost Items</span>
+            </a>
+          </Link>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Found Items</span>
           </a>
