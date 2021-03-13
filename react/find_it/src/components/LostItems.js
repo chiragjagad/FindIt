@@ -2,13 +2,31 @@ import React from "react";
 import firebase from "firebase";
 
 function LostItems() {
+  const TableBody = document.getElementById("table-body");
+
   var db = firebase.firestore();
   var col = db.collection("lost-items");
+  const lostarr = [];
   var lostitems = col
     .get()
     .then((snapshot) => {
-      console.log(snapshot.val());
-      snapshot.forEach((doc) => {});
+      var content = "";
+      snapshot.forEach((doc) => {
+        var ItemData = doc.data();
+        console.log(ItemData);
+        let html = `<tr>
+        <td>${ItemData.types}</td>
+        <td>${ItemData.locfound}</td>
+        <td>${ItemData.locdeposited}</td>
+        <td>${ItemData.datetime}</td>
+        <td>${ItemData.description}</td>
+        <td>${ItemData.foundby}</td>
+        <td>${ItemData.claimers}</td>
+        <td>${ItemData.owner}</td>
+        </tr>`;
+        content += html;
+        TableBody.innerHTML = content;
+      });
     })
     .catch((err) => {
       console.log("Error getting documents", err);
@@ -41,21 +59,25 @@ function LostItems() {
               <thead>
                 <tr>
                   <th>Type</th>
-                  <th>Location</th>
+                  <th>Location Found</th>
+                  <th>Location Deposited</th>
                   <th>Date</th>
                   <th>Description</th>
                   <th>Found By</th>
                   <th>Claimers</th>
+                  <th>Owner</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
                   <th>Type</th>
-                  <th>Location</th>
+                  <th>Location Found</th>
+                  <th>Location Deposited</th>
                   <th>Date</th>
                   <th>Description</th>
                   <th>Found By</th>
                   <th>Claimers</th>
+                  <th>Owner</th>
                 </tr>
               </tfoot>
               <tbody id="table-body"></tbody>
