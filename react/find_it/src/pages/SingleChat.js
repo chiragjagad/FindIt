@@ -6,12 +6,38 @@ import AllChats from './AllChats'
 
 const SingleChat = ({ match }) => {
 
-    const query = firestoreDB.collection('chats/DWctr1yJVoaV46SKQxQ5/messages')
-    const [messages] = useCollectionData(query)
+    const otherUid = match.params.chatId
+
+    const uid = "DWctr1yJVoaV46SKQxQ5"
+
+    const [ textField, setTextField ] = useState("")
+
+    const chatsRef = firestoreDB.collection('chats')
+    const interactions = chatsRef.where('receiver', 'in', [uid, otherUid], 'AND', 'sender', 'in', [uid, otherUid])
+    const [messages] = useCollectionData(interactions)
+
+    const sendMessage = () => {
+        firestoreDB.collection('chats').add({
+            sender: uid,
+            receiver: otherUid,
+            message: textField,
+            createdAt: Firebase.firestore.FieldValue.serverTimestamp()
+        })
+        setTextField("")
+    }
 
     return (
-        <div>
-            {messages && messages.map(message => <div>{message.idUser}</div>)}
+        <div style={{ width: '100%' }} >
+            {messages && messages.map(message => <div style={{ 
+                display: 'flex',
+                margin: '10px',
+                justifyContent: uid === message.sender ? 'flex-end' : 'flex-start',
+                backgroundColor: uid === message.sender ? 'red' : 'blue',
+                borderRadius: '5px',
+                padding: '10px',
+            }}><p>{message.message}</p></div>)}
+        <input value={textField} onChange={event => setTextField(event.target.value)}/>
+        <button onClick={sendMessage}>GO</button>
         </div>
     )
 }
