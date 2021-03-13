@@ -10,18 +10,19 @@ import AllChats from "../pages/AllChats";
 function App() {
   return (
     <>
-      <Router>
-        <Switch>
-          <div className="App">
-            <Route exact path="/register" component={Register}></Route>
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/chats" component={AllChats} />
-            <Route path="/chat/:chatId" component={SingleChat} />
-            <Route exact path="/login" component={Login} />
-          </div>
-        </Switch>
-      </Router>
-    </>
+			<Router>
+				<Switch>
+					<div className="App">
+						<Route exact path="/register" component={Register}></Route>
+						<Route exact path="/dashboard" component={Dashboard} />
+                        <Route exact path="/chats" component={AllChats}/>
+                        <Route path="/chat/:chatId" component={SingleChat}/>
+						<Route exact path="/login" component={Login} />
+					</div>
+				</Switch>
+			</Router>
+		</>
+
   );
 }
 
