@@ -9,6 +9,7 @@ class MessageField {
 
 class Message {
   final String idUser;
+  final String receiver;
   final String urlAvatar;
   final String username;
   final String message;
@@ -16,6 +17,7 @@ class Message {
 
   const Message({
     @required this.idUser,
+    @required this.receiver,
     @required this.urlAvatar,
     @required this.username,
     @required this.message,
@@ -23,7 +25,8 @@ class Message {
   });
 
   static Message fromJson(Map<String, dynamic> json) => Message(
-    idUser: json['idUser'],
+    idUser: json['sender'],
+    receiver: json['receiver'],
     urlAvatar: json['urlAvatar'],
     username: json['username'],
     message: json['message'],
@@ -31,7 +34,8 @@ class Message {
   );
 
   Map<String, dynamic> toJson() => {
-    'idUser': idUser,
+    'sender': idUser,
+    'receiver':receiver,
     'urlAvatar': urlAvatar,
     'username': username,
     'message': message,

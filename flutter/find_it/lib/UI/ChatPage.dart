@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_it/loading.dart';
 import 'package:find_it/model/ChatUsers.dart';
+import 'package:find_it/model/PostItem.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../app_theme.dart';
 import '../firebase_api.dart';
 import 'ChatDetail.dart';
 
@@ -32,11 +34,15 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.nearlyWhite,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            SizedBox(
+              height: 0.07*MediaQuery.of(context).size.height,
+            ),
             SafeArea(
               child: Padding(
                 padding: EdgeInsets.only(left: 16, right: 16, top: 10),
@@ -44,7 +50,7 @@ class _ChatPageState extends State<ChatPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      "Conversations",
+                      "Requests",
                       style:
                           TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                     ),
@@ -52,8 +58,8 @@ class _ChatPageState extends State<ChatPage> {
                 ),
               ),
             ),
-            StreamBuilder<List<UserC>>(
-                stream: FirebaseApi.getUsers(),
+            StreamBuilder<List<PostItem>>(
+                stream: FirebaseApi.getItems(),
                 builder: (context, snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting:
@@ -63,18 +69,25 @@ class _ChatPageState extends State<ChatPage> {
                         print(snapshot.error);
                         return Text('Something Went Wrong Try later');
                       } else {
-                        final users = snapshot.data;
+                        final items1 = snapshot.data;
 
-                        if (users.isEmpty) {
+
+                        if (items1.isEmpty) {
                           return Text('No Users Found');
-                        } else
+                        } else{
+                          List<PostItem> items=[];
+                          for(PostItem item in items1){
+                            if(item.claimers.contains(mFirebaseUser.uid)){
+                              items.add(item);
+                            }
+                          }
                           return ListView.builder(
-                            itemCount: users.length,
+                            itemCount: items.length,
                             shrinkWrap: true,
                             padding: EdgeInsets.only(top: 16),
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) =>
-                                buildItem(context, users[index]),
+                                buildItem(context, items[index]),
                             // itemBuilder: (context, index) {
                             //   return ConversationList(
                             //     name: chatUsers[index].name,
@@ -85,7 +98,7 @@ class _ChatPageState extends State<ChatPage> {
                             //         (index == 0 || index == 3) ? true : false,
                             //   );
                             // },
-                          );
+                          );}
                       }
                   }
                 }),
@@ -95,9 +108,14 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  Widget buildItem(BuildContext context, UserC user) {
+  Widget buildItem(BuildContext context, PostItem item) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async{
+        print(item.admin.toString());
+        UserC user=await FirebaseFirestore.instance.collection('users').doc(item.admin).get().then((value) {
+          print(value.data());
+          return UserC.fromJson(value.data());
+        });
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return ChatDetailPage(user: user,);
         }));
@@ -110,7 +128,7 @@ class _ChatPageState extends State<ChatPage> {
               child: Row(
                 children: <Widget>[
                   CircleAvatar(
-                    backgroundImage: AssetImage("lib/images/support.png"),
+                    backgroundImage: AssetImage("lib/images/package.png"),
                     maxRadius: 30,
                   ),
                   SizedBox(
@@ -123,8 +141,11 @@ class _ChatPageState extends State<ChatPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            user.name,
-                            style: TextStyle(fontSize: 16),
+                            item.description,
+                            style: TextStyle(fontWeight: FontWeight.w400,
+                              fontSize: 19,
+                              letterSpacing: 0.27,
+                              color: AppTheme.darkerText,),
                           ),
                           SizedBox(
                             height: 6,
