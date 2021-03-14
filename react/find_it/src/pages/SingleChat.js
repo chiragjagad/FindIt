@@ -13,7 +13,7 @@ const SingleChat = ({ match }) => {
     const [ textField, setTextField ] = useState("")
 
     const chatsRef = firestoreDB.collection('chats')
-    const interactions = chatsRef.where('receiver', 'in', [uid, otherUid], 'AND', 'sender', 'in', [uid, otherUid])
+    const interactions = chatsRef.where('receiver', 'in', [uid, otherUid], 'AND', 'sender', 'in', [uid, otherUid]).orderBy("createdAt")
     const [messages] = useCollectionData(interactions)
 
     const sendMessage = () => {

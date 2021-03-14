@@ -10,7 +10,10 @@ function LostItems() {
   var lost = query.where("claimedby", "==", "");
 
   const [lostItems] = useCollectionData(lost);
-
+  const onFormSubmit=(e)=>{
+    e.preventDefault();
+    console.log(e.target.value);
+  }
   return (
     <div class="container-fluid">
       <h1 class="h3 mb-2 text-gray-800">Tables</h1>
@@ -92,15 +95,19 @@ function LostItems() {
                         </td>
                       )}
                       <td>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id=""
-                          style={{ marginBottom: "10px" }}
-                        />
-                        <button type="button" class="btn btn-primary">
+                      <form id={i} onSubmit={onFormSubmit}>
+                        <select>
+                          <option value={item.claimers[0]}>{item.claimers[0]}</option>
+                          <option value={item.claimers[1]}>{item.claimers[1]}</option>
+                          <option value={item.claimers[2]}>{item.claimers[2]}</option>
+                          <option value={item.claimers[3]}>{item.claimers[3]}</option>
+                          <option value={item.claimers[4]}>{item.claimers[4]}</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">
                           Claim
                         </button>
+                      </form>
+                        
                       </td>
                     </tr>
                   );
