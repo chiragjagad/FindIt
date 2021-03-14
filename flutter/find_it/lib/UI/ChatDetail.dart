@@ -102,8 +102,13 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 //     if (snapshot.hasError) {
                 //       return Text('Something Went Wrong Try later');
                 //     } else {
-                      final messages = snapshot.data;
-
+                      final messages1 = snapshot.data;
+                      List messages=[];
+                      for(Message m in messages1){
+                        if((m.receiver==mUser.uid)||(m.idUser==mUser.uid)){
+                            messages.add(m);
+                        }
+                      }
                       return ListView.builder(
                         itemCount: messages.length,
                         shrinkWrap: true,

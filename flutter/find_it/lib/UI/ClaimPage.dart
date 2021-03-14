@@ -130,7 +130,15 @@ class _ClaimPageState extends State<ClaimPage> {
                               onTap: () async{
                                 FirebaseApi api=new FirebaseApi();
                                 await api.saveClaim(widget.item);
+                                //final scaffold = Scaffold.of(context);
+                                // scaffold.showSnackBar(
+                                //     SnackBar(
+                                //       duration: Duration(seconds: 1),
+                                //       content: const Text('Claimed successfully, \n Go to requests to contact our staff.'),
+                                //
+                                //     ),);
                                 setState(() {
+
                                   claimed=true;
                                 });
                               },
@@ -160,4 +168,15 @@ class _ClaimPageState extends State<ClaimPage> {
       ),
     );
   }
+
+}
+void _showToast(BuildContext context) {
+  final scaffold = Scaffold.of(context);
+  scaffold.showSnackBar(
+    SnackBar(
+      duration: Duration(seconds: 1),
+      content: const Text('Claimed successfully, \n Go to requests to contact our staff.'),
+
+    ),
+  );
 }
