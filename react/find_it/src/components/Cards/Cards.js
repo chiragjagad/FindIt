@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import firebase from "firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import img from "./img/package.png";
 
 function Cards() {
   const [type0, setType0] = useState("");
@@ -242,7 +243,7 @@ function Cards() {
                   </div>
                 </div>
                 <div class="col-auto">
-                  <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                  <i class="fas fa-bookmark fa-2x text-gray-300"></i>
                 </div>
               </div>
             </div>
@@ -265,7 +266,7 @@ function Cards() {
                   </div>
                 </div>
                 <div class="col-auto">
-                  <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                  <i class="fas fa-bookmark fa-2x text-gray-300"></i>
                 </div>
               </div>
             </div>
@@ -287,7 +288,7 @@ function Cards() {
                   </div>
                 </div>
                 <div class="col-auto">
-                  <i class="fas fa-comments fa-2x text-gray-300"></i>
+                  <i class="fas fa-bookmark fa-2x text-gray-300"></i>
                 </div>
               </div>
             </div>
@@ -330,53 +331,28 @@ function Cards() {
       </div>
 
       <div class="row">
-        <div class="col-xl-4 col-lg-5">
+        <div class="col-xl-8 col-lg-7">
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">
-                Lorem ipsum dolor sit amet.
-              </h6>
+              <h6 class="m-0 font-weight-bold text-primary">About Us</h6>
             </div>
             <div class="card-body">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos,
-                qui recusandae. Voluptate explicabo voluptas, corrupti adipisci
-                quos blanditiis iure voluptatum suscipit quasi eligendi, ea
-                beatae deserunt at quis placeat ipsum!
-              </p>
+              <img src={img} height="300px"></img>
             </div>
           </div>
         </div>
+
         <div class="col-xl-4 col-lg-5">
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">
-                Lorem ipsum dolor sit amet.
-              </h6>
+              <h6 class="m-0 font-weight-bold text-primary">About FINDIT</h6>
             </div>
             <div class="card-body">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos,
-                qui recusandae. Voluptate explicabo voluptas, corrupti adipisci
-                quos blanditiis iure voluptatum suscipit quasi eligendi, ea
-                beatae deserunt at quis placeat ipsum!
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-5">
-          <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">
-                Lorem ipsum dolor sit amet.
-              </h6>
-            </div>
-            <div class="card-body">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos,
-                qui recusandae. Voluptate explicabo voluptas, corrupti adipisci
-                quos blanditiis iure voluptatum suscipit quasi eligendi, ea
-                beatae deserunt at quis placeat ipsum!
+                This is a web-based application for managing records of lost and
+                found items. This software works best to make sure that any lost
+                items are returned to their rightful owners. You can find your
+                lost item here and claim for it.
               </p>
             </div>
           </div>
