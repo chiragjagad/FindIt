@@ -39,7 +39,7 @@ function FoundItems() {
                   <th width="300px">Description</th>
                   <th>Found By</th>
                   <th>Claimers</th>
-                  <th>Owner if known</th>
+                  <th>Claimed by</th>
                 </tr>
               </thead>
               {founditems &&
