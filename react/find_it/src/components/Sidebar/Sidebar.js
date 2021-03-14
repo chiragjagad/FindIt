@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "./img/findit-logo.png";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link,NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -52,10 +52,10 @@ const Sidebar = () => {
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="tables.html">
+          <NavLink to="/chats" class="nav-link" href="tables.html">
             <i class="fas fa-fw fa-comment-dots"></i>
             <span>ChatBox</span>
-          </a>
+          </NavLink>
         </li>
 
         <hr class="sidebar-divider d-none d-md-block" />

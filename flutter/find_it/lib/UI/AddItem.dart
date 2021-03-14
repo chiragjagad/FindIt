@@ -19,6 +19,7 @@ class _AddItemState extends State<AddItem> {
   @override
   void initState() {
     super.initState();
+
     _nameController = TextEditingController();
   }
 
@@ -462,16 +463,19 @@ class _AddItemState extends State<AddItem> {
                             ),
                             ..._getFriends(),
                             Container(
-                              padding: EdgeInsets.only(top:20),
+
+                              padding: EdgeInsets.only(top:10,bottom: 10),
                               child: Center(
                                 child: FlatButton(
                                   onPressed: () async {
                                     if (_formKey.currentState.validate()) {
-                                      _formKey.currentState.save();
+
                                       postItem.types=typesList;
                                       postItem.datetime=DateTime.now();
                                       postItem.claimedby="";
                                       postItem.claimers=[];
+                                      postItem.admin="DWctr1yJVoaV46SKQxQ5";
+                                      _formKey.currentState.reset();
                                       await FirebaseApi.uploadItem(postItem);
                                     }
                                   },
@@ -509,7 +513,7 @@ class _AddItemState extends State<AddItem> {
             FriendTextFields(i),
 
             // we need add button at last friends row
-            _addRemoveButton(i == typesList.length - 1, i),
+            _addRemoveButton(i == 0, i),
           ],
         ),
       ));

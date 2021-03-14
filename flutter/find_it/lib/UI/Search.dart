@@ -38,7 +38,7 @@ class _SearchState extends State<Search> {
                 child: SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
                   child: Container(
-                    height: MediaQuery.of(context).size.height,
+
                     child: Column(
                       children: <Widget>[
                         getSearchBarUI(),
@@ -66,18 +66,23 @@ class _SearchState extends State<Search> {
                                       for(PostItem item in items1){
                                         if(item.description.toLowerCase().contains(new RegExp(r''+search, caseSensitive: false))||
                                             search.contains(new RegExp(r''+item.description, caseSensitive: false))){
-                                          items.add(item);
-                                          break;
+                                          if(item.claimedby.isEmpty) {
+                                            items.add(item);
+                                          }
+                                          continue;
                                         }
                                         for(String type in item.types){
                                           print(item.types);
                                           if(type.contains(new RegExp(r''+search, caseSensitive: false))||
                                               search.contains(new RegExp(r''+type, caseSensitive: false))){
-                                            items.add(item);
-                                            break;
+                                            if(item.claimedby.isEmpty) {
+                                              items.add(item);
+                                            }
+                                            continue;
                                           }
                                         }
                                       }
+                                      search="";
 
                                       return ListView.builder(
                                         itemCount: items.length,
@@ -118,7 +123,7 @@ class _SearchState extends State<Search> {
   Widget buildItem(BuildContext context, PostItem item) {
     return Card(
 
-      margin: EdgeInsets.only(bottom: 10,left: 5,right: 5),
+      margin: EdgeInsets.only(bottom: 10,left: 16,right: 16),
       elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
@@ -154,13 +159,16 @@ class _SearchState extends State<Search> {
                                 letterSpacing: 0.27,
                                 color: AppTheme.darkerText,),
                             ),
-                            Text(
-                              'Found At:'+item.locfound,
-                              style:TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                letterSpacing: 0.2,
-                                color: AppTheme.grey,
+                            Container(
+                              margin: EdgeInsets.only(top:7),
+                              child: Text(
+                                'Found At:'+item.locfound,
+                                style:TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                  letterSpacing: 0.2,
+                                  color: AppTheme.grey,
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -366,7 +374,7 @@ class _SearchState extends State<Search> {
                     ),
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      labelText: 'Search',
+                      hintText: 'Search',
                       border: InputBorder.none,
                       helperStyle: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -392,6 +400,7 @@ class _SearchState extends State<Search> {
           InkWell(
             onTap: (){
               setState(() {
+
                 items=[];
 
               });

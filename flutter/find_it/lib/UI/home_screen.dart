@@ -107,22 +107,22 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               width: AppBar().preferredSize.height - 8,
               height: AppBar().preferredSize.height - 8,
               color: Colors.white,
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius:
-                  BorderRadius.circular(AppBar().preferredSize.height),
-                  child: Icon(
-                    multiple ? Icons.dashboard : Icons.view_agenda,
-                    color: AppTheme.dark_grey,
-                  ),
-                  onTap: () {
-                    setState(() {
-                      multiple = !multiple;
-                    });
-                  },
-                ),
-              ),
+              // child: Material(
+              //   color: Colors.transparent,
+              //   child: InkWell(
+              //     borderRadius:
+              //     BorderRadius.circular(AppBar().preferredSize.height),
+              //     child: Icon(
+              //       multiple ? Icons.dashboard : Icons.view_agenda,
+              //       color: AppTheme.dark_grey,
+              //     ),
+              //     onTap: () {
+              //       setState(() {
+              //         multiple = !multiple;
+              //       });
+              //     },
+              //   ),
+              // ),
             ),
           ),
         ],

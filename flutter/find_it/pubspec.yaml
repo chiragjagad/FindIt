@@ -67,6 +67,9 @@ flutter:
     - lib/images/support.png
     - lib/images/Google Logo.png
     - lib/images/package.png
+    - lib/images/unnamed.png
+    - lib/images/unnamed1.png
+    - lib/images/unnamed2.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

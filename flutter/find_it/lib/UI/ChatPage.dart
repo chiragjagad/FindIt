@@ -77,7 +77,7 @@ class _ChatPageState extends State<ChatPage> {
                         } else{
                           List<PostItem> items=[];
                           for(PostItem item in items1){
-                            if(item.claimers.contains(mFirebaseUser.uid)){
+                            if(item.claimers.contains(mFirebaseUser.uid)&&item.claimedby.isEmpty){
                               items.add(item);
                             }
                           }
@@ -128,7 +128,7 @@ class _ChatPageState extends State<ChatPage> {
               child: Row(
                 children: <Widget>[
                   CircleAvatar(
-                    backgroundImage: AssetImage("lib/images/package.png"),
+                    backgroundImage: AssetImage("lib/images/package.png",),
                     maxRadius: 30,
                   ),
                   SizedBox(
