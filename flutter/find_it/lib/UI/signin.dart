@@ -42,17 +42,21 @@ class SigninState extends State {
                   new Expanded(
                       flex:3,
                       child: Container(
+
                         child: Center(
                           child:Image.asset("lib/images/search.png")
                         ),
                       )),
+                  Text(""),
                   new Expanded(
-                      flex: 6,
+                      flex: 5,
                       child: Text(
-                        'Welcomes You!'
+                        'FINDIT'
                         ,style: TextStyle(
                           color: Colors.black,
-                          fontSize: 20
+                          fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.5
                       ),)
                   ),
                   // new Expanded(child: new Container(color: Colors.black)),
@@ -74,7 +78,7 @@ class SigninState extends State {
                                     child:Container(
                                         height: 70,
                                         decoration:BoxDecoration(
-                                          border:Border.all(color: HexColor("#03FDFC")),
+                                          border:Border.all(color: Colors.black),
                                           shape: BoxShape.circle,),
                                         child: IconButton(
                                           icon: new Image.asset('lib/images/Google Logo.png',height: 40,width: 45,),

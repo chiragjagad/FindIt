@@ -1,6 +1,7 @@
 import 'package:find_it/UI/signin.dart';
 import 'package:find_it/app_theme.dart';
 import 'package:find_it/services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatefulWidget {
@@ -89,7 +90,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                             ),
                             child: ClipRRect(
                               borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-                              child: Image.asset('assets/images/userImage.png'),
+                              child: Image.network(FirebaseAuth.instance.currentUser.photoURL),
                             ),
                           ),
                         ),
@@ -99,7 +100,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   Padding(
                     padding: const EdgeInsets.only(top: 8, left: 4),
                     child: Text(
-                      'Chris Hemsworth',
+                      FirebaseAuth.instance.currentUser.displayName,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: AppTheme.grey,

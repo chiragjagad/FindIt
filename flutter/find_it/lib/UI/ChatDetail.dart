@@ -16,7 +16,7 @@ class ChatDetailPage extends StatefulWidget {
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
   User mUser = FirebaseAuth.instance.currentUser;
-
+  final fieldText = TextEditingController();
   final _controller = TextEditingController();
   String message = '';
 
@@ -168,6 +168,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   ),
                   Expanded(
                     child: TextField(
+                      controller: fieldText,
                       onChanged: (value) => setState(() {
                         message = value;
                       }),
@@ -183,6 +184,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   FloatingActionButton(
                     onPressed: () {
                       message.trim().isEmpty ? print("HI") : sendMessage();
+                      fieldText.clear();
                     },
                     child: Icon(
                       Icons.send,

@@ -7,9 +7,19 @@ class Utils {
       T Function(Map<String, dynamic> json) fromJson) =>
       StreamTransformer<QuerySnapshot, List<T>>.fromHandlers(
         handleData: (QuerySnapshot data, EventSink<List<T>> sink) {
-          final snaps = data.docs.map((doc) => doc.data()).toList();
-          final users = snaps.map((json) => fromJson(json)).toList();
+          var snaps = data.docs.map((doc) {
 
+            return doc.data();
+          }).toList();
+         // print(snaps);
+          int index=0;
+          for(var snap in snaps){
+            snap['id']=data.docs[index].id;
+            index++;
+          }
+          print(snaps);
+          final users = snaps.map((json) => fromJson(json)).toList();
+          //print(users);
           sink.add(users);
         },
       );
