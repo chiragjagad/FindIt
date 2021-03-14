@@ -6,22 +6,25 @@ import Dashboard from "../pages/Dashboard";
 import Register from "../pages/Register";
 import SingleChat from "../pages/SingleChat";
 import AllChats from "../pages/AllChats";
+import Testing from '../pages/Testing';
 
 function App() {
   return (
     <>
-      <Router>
-        <Switch>
-          <div className="App">
-            <Route exact path="/register" component={Register}></Route>
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/chats" component={AllChats} />
-            <Route path="/chat/:chatId" component={SingleChat} />
-            <Route exact path="/login" component={Login} />
-          </div>
-        </Switch>
-      </Router>
-    </>
+			<Router>
+				<Switch>
+					<div className="App">
+						<Route exact path="/register" component={Register}></Route>
+						<Route exact path="/dashboard" component={Dashboard} />
+                        <Route exact path="/chats" component={AllChats}/>
+                        <Route path="/chat/:chatId" component={SingleChat}/>
+						<Route exact path="/login" component={Login} />
+						<Route exact path="/test" component={Testing} />
+					</div>
+				</Switch>
+			</Router>
+		</>
+
   );
 }
 

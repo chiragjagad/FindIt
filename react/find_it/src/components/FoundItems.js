@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import firebase from "firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
-function LostItems() {
+function FoundItems() {
   const TableBody = document.getElementById("table-body");
 
   var db = firebase.firestore();
   var query = db.collection("lost-items");
-  var lost = query.where("claimedby", "==", "");
+  var found = query.where("claimedby", "!=", "");
 
-  const [lostItems] = useCollectionData(lost);
+  const [founditems] = useCollectionData(found);
 
   return (
     <div class="container-fluid">
@@ -19,7 +19,7 @@ function LostItems() {
       <div class="card shadow mb-4">
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">
-            Find your lost item here
+            Find your found item here
           </h6>
         </div>
         <div class="card-body">
@@ -35,18 +35,15 @@ function LostItems() {
                   <th>Type</th>
                   <th>Location Found</th>
                   <th>Location Deposited</th>
-                  <th width="200px">Date</th>
-                  <th width="200px">Description</th>
+                  <th width="300px">Date</th>
+                  <th width="300px">Description</th>
                   <th>Found By</th>
-                  <th>Owner if known</th>
                   <th>Claimers</th>
-                  <th>Give claim to</th>
+                  <th>Owner if known</th>
                 </tr>
               </thead>
-              {lostItems &&
-                lostItems.map((item, i) => {
-                  console.log(item);
-                  console.log(i);
+              {founditems &&
+                founditems.map((item) => {
                   const timeStampDate = item.datetime;
                   //console.log(timeStampDate);
                   const dateInMillis = timeStampDate.seconds * 1000;
@@ -56,7 +53,7 @@ function LostItems() {
                     " at " +
                     new Date(dateInMillis).toLocaleTimeString();
                   return (
-                    <tr key={i}>
+                    <tr>
                       <td>
                         {item.types[0]}
                         <br />
@@ -74,7 +71,6 @@ function LostItems() {
                       <td>{date}</td>
                       <td>{item.description}</td>
                       <td>{item.foundby}</td>
-                      <td>{item.owner}</td>
                       {item.claimers == null ? (
                         <td></td>
                       ) : (
@@ -91,17 +87,7 @@ function LostItems() {
                           <br />
                         </td>
                       )}
-                      <td>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id=""
-                          style={{ marginBottom: "10px" }}
-                        />
-                        <button type="button" class="btn btn-primary">
-                          Claim
-                        </button>
-                      </td>
+                      <td>{item.claimedby}</td>
                     </tr>
                   );
                 })}
@@ -113,9 +99,8 @@ function LostItems() {
                   <th>Date</th>
                   <th>Description</th>
                   <th>Found By</th>
-                  <th>Owner if known</th>
                   <th>Claimers</th>
-                  <th>Give claim to</th>
+                  <th>Claimed by</th>
                 </tr>
               </tfoot>
               <tbody id="table-body"></tbody>
@@ -127,4 +112,4 @@ function LostItems() {
   );
 }
 
-export default LostItems;
+export default FoundItems;
