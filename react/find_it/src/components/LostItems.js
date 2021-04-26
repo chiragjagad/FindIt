@@ -10,10 +10,10 @@ function LostItems() {
   var lost = query.where("claimedby", "==", "");
 
   const [lostItems] = useCollectionData(lost);
-  const onFormSubmit=(e)=>{
+  const onFormSubmit = (e) => {
     e.preventDefault();
     console.log(e.target.value);
-  }
+  };
   return (
     <div class="container-fluid">
       <h1 class="h3 mb-2 text-gray-800">Tables</h1>
@@ -95,19 +95,33 @@ function LostItems() {
                         </td>
                       )}
                       <td>
-                      <form id={i} onSubmit={onFormSubmit}>
-                        <select>
-                          <option value={item.claimers[0]}>{item.claimers[0]}</option>
-                          <option value={item.claimers[1]}>{item.claimers[1]}</option>
-                          <option value={item.claimers[2]}>{item.claimers[2]}</option>
-                          <option value={item.claimers[3]}>{item.claimers[3]}</option>
-                          <option value={item.claimers[4]}>{item.claimers[4]}</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">
-                          Claim
-                        </button>
-                      </form>
-                        
+                        <form id={i} onSubmit={onFormSubmit}>
+                          <select>
+                            <option value={item.claimers[0]}>
+                              {item.claimers[0]}
+                            </option>
+                            <option value={item.claimers[1]}>
+                              {item.claimers[1]}
+                            </option>
+                            <option value={item.claimers[2]}>
+                              {item.claimers[2]}
+                            </option>
+                            <option value={item.claimers[3]}>
+                              {item.claimers[3]}
+                            </option>
+                            <option value={item.claimers[4]}>
+                              {item.claimers[4]}
+                            </option>
+                          </select>
+                          <br></br>
+                          <button
+                            type="submit"
+                            class="btn btn-primary"
+                            style={{ marginTop: "10px" }}
+                          >
+                            Claim
+                          </button>
+                        </form>
                       </td>
                     </tr>
                   );
